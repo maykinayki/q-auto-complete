@@ -116,7 +116,7 @@ class QAutoComplete extends Component {
             e.preventDefault();
             this.onDropDownItemSelect(e, item)
         }
-        if(e.which === 40) {
+        if(e.which === 40 && e.target.nextSibling) {
             e.preventDefault();
             e.target.nextSibling.focus();
         }
