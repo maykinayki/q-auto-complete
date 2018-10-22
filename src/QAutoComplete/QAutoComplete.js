@@ -22,7 +22,8 @@ class QAutoComplete extends Component {
         valueProp: "value",
         labelProp: "label",
         isAjaxFilter: false,
-        showLoader: false
+        showLoader: false,
+        onInputChange: function () {}
     };
 
     componentDidMount() {
@@ -37,6 +38,8 @@ class QAutoComplete extends Component {
         const value = e.target.value;
         this.setState({
             inputValue: value
+        }, () => {
+            this.props.onInputChange(value);
         })
     };
 
