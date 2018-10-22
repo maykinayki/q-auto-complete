@@ -28,6 +28,10 @@ class QAutoComplete extends Component {
         onInputChange: function () {}
     };
 
+    toPx = (value) => {
+        return value + "px";
+    };
+
     componentDidMount() {
         document.body.appendChild(this.dropDownEl);
     }
@@ -51,10 +55,24 @@ class QAutoComplete extends Component {
         })
     };
 
-    onInputFocus = () => {
+    onInputFocus = (e) => {
+        const input = e.target;
         this.setState({
             isInputFocused: true
+        }, () => {
+            this.setDropDownPosition(input);
         });
+    };
+
+    setDropDownPosition = (input) => {
+        const inputClientRect = input.getBoundingClientRect();
+        const inputWidth = inputClientRect.width;
+        const inputHeight = inputClientRect.height;
+        const inputOffsetX = inputClientRect.left;
+        const inputOffsetY = inputClientRect.top;
+        this.dropDownEl.style.width = this.toPx(inputWidth);
+        this.dropDownEl.style.left = this.toPx(inputOffsetX);
+        this.dropDownEl.style.top = this.toPx(inputOffsetY + inputHeight);
     };
 
     onDropDownItemFocus = () => {
