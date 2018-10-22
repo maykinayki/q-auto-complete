@@ -13,6 +13,14 @@ class QAutoComplete extends Component {
         };
     }
 
+    componentDidMount() {
+        document.body.appendChild(this.dropDownEl);
+    }
+
+    componentWillUnmount() {
+        document.body.removeChild(this.dropDownEl);
+    }
+
     render() {
         return (
             <Fragment>
