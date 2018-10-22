@@ -111,6 +111,17 @@ class QAutoComplete extends Component {
         });
     };
 
+    onDropDownItemKeyDown = (e, item) => {
+        if(e.which === 13) {
+            e.preventDefault();
+            this.onDropDownItemSelect(e, item)
+        }
+        if(e.which === 40) {
+            e.preventDefault();
+            e.target.nextSibling.focus();
+        }
+    };
+
     onDropDownItemSelect = (e, item) => {
         this.setState({
             selectedDataItem: item,
@@ -147,6 +158,7 @@ class QAutoComplete extends Component {
                     onFocus={this.onDropDownItemFocus}
                     onBlur={this.onDropDownItemBlur}
                     onClick={(e) => this.onDropDownItemSelect(e, item)}
+                    onKeyDown={(e) => this.onDropDownItemKeyDown(e, item)}
                 >
                     {item[this.props.labelProp]}
                 </div>
