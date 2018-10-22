@@ -13,6 +13,7 @@ class QAutoComplete extends Component {
 
         this.state = {
             isInputFocused: false,
+            isDropDownItemFocused: false,
             selectedDataItem: null,
             inputValue: ""
         };
@@ -56,6 +57,18 @@ class QAutoComplete extends Component {
         });
     };
 
+    onDropDownItemFocus = () => {
+        this.setState({
+            isDropDownItemFocused: true
+        });
+    };
+
+    onDropDownItemBlur = () => {
+        this.setState({
+            isDropDownItemFocused: false
+        });
+    };
+
     renderLoader = () => {
         return (
             <svg version="1.1" id="loader-1" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="40px" height="40px" viewBox="0 0 40 40" enableBackground="new 0 0 40 40" xmlSpace="preserve">
@@ -80,6 +93,8 @@ class QAutoComplete extends Component {
                     className="auto-complete-dropdown-list-item"
                     tabIndex={index + 1}
                     key={item[this.props.valueProp]}
+                    onFocus={this.onDropDownItemFocus}
+                    onBlur={this.onDropDownItemBlur}
                 >
                     {item[this.props.labelProp]}
                 </div>
