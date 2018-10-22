@@ -41,6 +41,16 @@ class QAutoComplete extends Component {
         document.body.removeChild(this.dropDownEl);
     }
 
+    componentDidUpdate() {
+        window.setTimeout(() => {
+            if(this.state.isInputFocused || this.state.isDropDownItemFocused) {
+                this.dropDownEl.style.display = 'block';
+            } else {
+                this.dropDownEl.style.display = 'none';
+            }
+        }, 0);
+    }
+
     onInputChange = (e) => {
         const value = e.target.value;
         this.setState({
