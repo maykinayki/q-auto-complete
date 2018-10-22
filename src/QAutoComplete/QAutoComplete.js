@@ -75,6 +75,19 @@ class QAutoComplete extends Component {
         });
     };
 
+    // focus first element in dropdown list when arrow down or tab clicked while input focused
+    onInputKeyDown = (e) => {
+        // TAB keycode = 40
+        // arrow down keycode = 9
+        if(e.which === 40 || e.which === 9) {
+            e.preventDefault();
+            const listElements = this.dropDownEl.getElementsByClassName('auto-complete-dropdown-list-item');
+            if(listElements.length > 0) {
+                listElements[0].focus();
+            }
+        }
+    };
+
     setDropDownPosition = (input) => {
         const inputClientRect = input.getBoundingClientRect();
         const inputWidth = inputClientRect.width;
@@ -94,6 +107,15 @@ class QAutoComplete extends Component {
 
     onDropDownItemBlur = () => {
         this.setState({
+            isDropDownItemFocused: false
+        });
+    };
+
+    onDropDownItemSelect = (e, item) => {
+        this.setState({
+            selectedDataItem: item,
+            inputValue: item[this.props.labelProp],
+            isInputFocused: false,
             isDropDownItemFocused: false
         });
     };
@@ -124,6 +146,7 @@ class QAutoComplete extends Component {
                     key={item[this.props.valueProp]}
                     onFocus={this.onDropDownItemFocus}
                     onBlur={this.onDropDownItemBlur}
+                    onClick={(e) => this.onDropDownItemSelect(e, item)}
                 >
                     {item[this.props.labelProp]}
                 </div>
@@ -149,6 +172,7 @@ class QAutoComplete extends Component {
                        onChange={this.onInputChange}
                        onFocus={this.onInputFocus}
                        onBlur={this.onInputBlur}
+                       onKeyDown={this.onInputKeyDown}
                        value={this.state.inputValue}
                 />
                 {this.renderDropDown()}
