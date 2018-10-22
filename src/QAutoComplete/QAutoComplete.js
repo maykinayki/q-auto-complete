@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from "react";
 import ReactDOM from "react-dom";
 import classnames from "classnames";
+import './qautocomplete.scss';
 
 class QAutoComplete extends Component {
     constructor(props) {
