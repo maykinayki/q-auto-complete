@@ -10,8 +10,18 @@ class QAutoComplete extends Component {
         this.dropDownEl.classList.add('auto-complete-dropdown');
 
         this.state = {
+            selectedDataItem: null,
+            inputValue: ""
         };
     }
+
+    static defaultProps = {
+        data: [],
+        valueProp: "value",
+        labelProp: "label",
+        isAjaxFilter: false,
+        showLoader: false
+    };
 
     componentDidMount() {
         document.body.appendChild(this.dropDownEl);
@@ -21,11 +31,20 @@ class QAutoComplete extends Component {
         document.body.removeChild(this.dropDownEl);
     }
 
+    onInputChange = (e) => {
+        const value = e.target.value;
+        this.setState({
+            inputValue: value
+        })
+    };
+
     render() {
         return (
             <Fragment>
                 <input className="auto-complete"
                        type="text"
+                       onChange={this.onInputChange}
+                       value={this.state.inputValue}
                 />
             </Fragment>
         )
