@@ -41,7 +41,7 @@ input.auto-complete {
   }
   &.loading {
     .auto-complete-dropdown-list-item {
-      opacity: 0.5;
+      display: none;
     }
   }
   .loader-container {
