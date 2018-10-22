@@ -12,6 +12,7 @@ class QAutoComplete extends Component {
         this.dropDownEl.classList.add('auto-complete-dropdown');
 
         this.state = {
+            isInputFocused: false,
             selectedDataItem: null,
             inputValue: ""
         };
@@ -41,6 +42,18 @@ class QAutoComplete extends Component {
         }, () => {
             this.props.onInputChange(value);
         })
+    };
+
+    onInputBlur = () => {
+        this.setState({
+            isInputFocused: false
+        })
+    };
+
+    onInputFocus = () => {
+        this.setState({
+            isInputFocused: true
+        });
     };
 
     renderLoader = () => {
@@ -90,6 +103,8 @@ class QAutoComplete extends Component {
                 <input className="auto-complete"
                        type="text"
                        onChange={this.onInputChange}
+                       onFocus={this.onInputFocus}
+                       onBlur={this.onInputBlur}
                        value={this.state.inputValue}
                 />
                 {this.renderDropDown()}
