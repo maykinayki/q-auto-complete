@@ -41,18 +41,23 @@ class App extends Component {
     };
 
     render() {
+
+        const mockData = [
+            {
+                label: "Test",
+                value: "test-1"
+            },
+            {
+                label: "Test 2",
+                value: "test-2"
+            }
+        ];
+
         return (
             <div className="app">
 
                 <QAutoComplete
-                    valueProp="uri"
-                    labelProp="name"
-                    data={this.state.data}
-                    isAjaxFilter={true}
-                    showLoader={this.state.showLoader}
-                    onInputChange={(value) => {
-                        this.fetchFromVimeo(value);
-                    }}
+                    data={mockData}
                 />
 
             </div>
