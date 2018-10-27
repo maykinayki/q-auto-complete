@@ -26,6 +26,7 @@ class QAutoComplete extends Component {
         labelProp: "label",
         isAjaxFilter: false,
         showLoader: false,
+        placeholder: "Type to search",
         onInputChange: function () {}
     };
 
@@ -181,6 +182,7 @@ class QAutoComplete extends Component {
             <Fragment>
                 <input className="auto-complete"
                        type="text"
+                       placeholder={this.props.placeholder}
                        onChange={this.onInputChange}
                        onFocus={this.onInputFocus}
                        onBlur={this.onInputBlur}
